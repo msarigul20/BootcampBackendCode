@@ -6,10 +6,17 @@ namespace Day5Homework5
     class CustomerManager:ICustomerService
     {
         List<Customer> customerList = new List<Customer>();
+        ICheckPersonService _myPersonChecker;
+
+        public CustomerManager (ICheckPersonService checkPersonService)
+	    {
+            _myPersonChecker = checkPersonService; 
+	    }
         public void Add(Customer customer)
         {
-            ICheckPersonService myPersonChecker = new MyCheckPersonManager();
-            if (myPersonChecker.CheckPerson(customer)) {
+           
+
+            if (_myPersonChecker.CheckPerson(customer)) {
                 customerList.Add(customer);
                 System.Console.WriteLine(customer.FirstName +" "+ customer.LastName + " added the system.");
             }

@@ -40,7 +40,8 @@ namespace Day5Homework5
     
             //Initialization of managers to use concrete operatios
             GameManager gameManager = new GameManager();
-            ICustomerService customerManager = new CustomerManager();
+            CustomerManager customerManager = new CustomerManager(new MyCheckPersonManager()) ;
+           
             ICampaignService campaignManager = new CampaignManager();
             ICheckPersonService checkPersonManager = new MyCheckPersonManager();
             ISaleService saleManager = new SaleManager();
