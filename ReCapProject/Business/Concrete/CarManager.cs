@@ -34,5 +34,40 @@ namespace Business.Concrete
                 return null; 
             }
         }
+
+        public void GetCarWithId(int carId)
+        {
+            //It is my other business rule.
+            //The rule of the authorities is to search by id if the total number of cars not more than 10.
+            //Don't force the system if there are cars more than 100 and send error message for uprading.
+            try
+            {
+                if (_carDal.CountCars() < 10)
+                {
+
+                    Console.WriteLine("**** -- SEARCHED BY ID ==> " + _carDal.GetById(carId).CarId + "  -- *******");
+                    //Used the object to trigger the exception codes before write anything on console.
+                    Console.WriteLine("The car information is below about your Car : ");
+                    Console.WriteLine("Car Id : " + _carDal.GetById(carId).CarId);
+                    Console.WriteLine("Car Brand Id : " + _carDal.GetById(carId).BrandId);
+                    Console.WriteLine("Car Color Id : " + _carDal.GetById(carId).ColorId);
+                    Console.WriteLine("Car Daily Price : " + _carDal.GetById(carId).DailyPrice + " TL");
+                    Console.WriteLine("Car Model Year : " + _carDal.GetById(carId).ModelYear);
+                    Console.WriteLine("Car Description : " + _carDal.GetById(carId).Description);
+                    Console.WriteLine("****************************************************");
+                }
+                else
+                {
+                    Console.WriteLine("Your account is using lower pack and you have 10 cars " +
+                        "so that you need to upgrade your pack to filter as id of car.");
+
+                }
+            }
+            catch (NullReferenceException)
+            {
+
+                Console.WriteLine("Id that entered in ConsoleUI did not find in cars.");
+            }
+        }
     }
 }

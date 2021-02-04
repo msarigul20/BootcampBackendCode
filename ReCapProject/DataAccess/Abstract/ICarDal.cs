@@ -11,7 +11,7 @@ namespace DataAccess.Abstract
         void Add(Car car);
         void Delete(Car car);
         void Update(Car car);
-        List<Car> GetByBrandId(int brandId);
+        Car GetById(int carId);
         int CountCars();
 
 

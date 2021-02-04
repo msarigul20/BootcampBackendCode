@@ -9,7 +9,7 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             CarManager carManager = new CarManager(new InMemoryCarDal());
-           
+
             try
             {
                 foreach (var car in carManager.GetAllCars())
@@ -28,6 +28,8 @@ namespace ConsoleUI
 
                 Console.WriteLine("Your request returned as a null. Please check your rules or requests.");
             }
+            carManager.GetCarWithId(1);
+            
         }
     }
 }
