@@ -39,7 +39,7 @@ namespace Business.Concrete
         {
             //It is my other business rule.
             //The rule of the authorities is to search by id if the total number of cars not more than 10.
-            //Don't force the system if there are cars more than 100 and send error message for uprading.
+            //Don't force the system if there are cars more than 10 and send error message for uprading.
             try
             {
                 if (_carDal.CountCars() < 10)
