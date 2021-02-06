@@ -15,6 +15,32 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
+
+        public List<Car> GetAll()
+        {
+           return _carDal.GetAll();
+        }
+
+        public List<Car> GetCarsByBrandId(int id)
+        {
+            return _carDal.GetAll(c => c.BrandId == id);
+        }
+
+        public List<Car> GetCarsByColorId(int id)
+        {
+            return _carDal.GetAll(c => c.ColorId == id);
+        }
+
+
+
+
+
+
+
+
+
+        //My old codes to storage
+        /*
         public List<Car> GetAllCars()
         {
             //It is my business rule.
@@ -69,5 +95,6 @@ namespace Business.Concrete
                 Console.WriteLine("Id that entered in ConsoleUI did not find in cars.");
             }
         }
+        */
     }
 }
