@@ -8,7 +8,14 @@ using System.Text;
 
 namespace DataAccess.Concrete.InMemory
 {
-    public class InMemoryCarDal : ICarDal
+
+    /*
+     * Ignored the intheritance because of I won't use anymore InMemory way to access data.
+     * I'll use EntityFramework way so that if it  implements ICarDal, this class will be error 
+     *  for adding each new method into ICarDal or changing each method. 
+     * Remove below comment in sign of class it you want to use InMemory way to access data.
+     */
+    public class InMemoryCarDal //: ICarDal
     {
         List<Car> _cars;
 

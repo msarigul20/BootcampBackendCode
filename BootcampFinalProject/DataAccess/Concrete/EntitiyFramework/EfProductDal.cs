@@ -17,7 +17,7 @@ namespace DataAccess.Concrete.EntityFramework
             //IDisposable pattern implementation of C# to gain memory speed by triggering garbage collector after terminating snippet.
             using (NorthwindContext context = new NorthwindContext())
             {
-                //Catch the reference
+                
                 var addedEntity = context.Entry(entity);
                 //Its object that will add.
                 addedEntity.State = EntityState.Added;
@@ -30,11 +30,8 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (NorthwindContext context = new NorthwindContext())
             {
-                //Catch the reference
                 var deletedEntity = context.Entry(entity);
-                //Its object that will delete.
                 deletedEntity.State = EntityState.Deleted;
-                //Save all changes.(Really deleted.)
                 context.SaveChanges();
             }
         }
@@ -59,11 +56,8 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (NorthwindContext context = new NorthwindContext())
             {
-                //Catch the reference
                 var updatedEntity = context.Entry(entity);
-                //Its object that will add.
                 updatedEntity.State = EntityState.Modified;
-                //Save all changes.(Really updated.)
                 context.SaveChanges();
             }
         }
