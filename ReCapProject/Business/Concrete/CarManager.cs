@@ -45,10 +45,10 @@ namespace Business.Concrete
                 if (_carDal.CountCars() < 10)
                 {
 
-                    Console.WriteLine("**** -- SEARCHED BY ID ==> " + _carDal.GetById(carId).CarId + "  -- *******");
+                    Console.WriteLine("**** -- SEARCHED BY ID ==> " + _carDal.GetById(carId).Id + "  -- *******");
                     //Used the object to trigger the exception codes before write anything on console.
                     Console.WriteLine("The car information is below about your Car : ");
-                    Console.WriteLine("Car Id : " + _carDal.GetById(carId).CarId);
+                    Console.WriteLine("Car Id : " + _carDal.GetById(carId).Id);
                     Console.WriteLine("Car Brand Id : " + _carDal.GetById(carId).BrandId);
                     Console.WriteLine("Car Color Id : " + _carDal.GetById(carId).ColorId);
                     Console.WriteLine("Car Daily Price : " + _carDal.GetById(carId).DailyPrice + " TL");
