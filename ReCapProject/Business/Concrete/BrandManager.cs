@@ -22,8 +22,8 @@ namespace Business.Concrete
             }
             else
             {
-                Console.WriteLine($"Brand did not add the database because the brand name must have 2 characters or more. You entered :{brand.BrandName}.");
-
+                Console.WriteLine($"Brand did not add the database because the brand name must have 2 characters or more. " +
+                    $"You entered :{brand.BrandName}.");
             }
         }
 
@@ -31,7 +31,6 @@ namespace Business.Concrete
         {
             _brandDal.Delete(brand);
             Console.WriteLine("Brand deleted succesfully.");
-
         }
 
         public List<Brand> GetAll()
@@ -53,8 +52,8 @@ namespace Business.Concrete
             }
             else
             {
-                Console.WriteLine($"Brand did not uptade the database because the brand name must have 2 characters or more. You entered :{brand.BrandName}.");
-
+                Console.WriteLine($"Brand did not uptade the database because the brand name must have 2 characters or more. " +
+                    $"You entered :{brand.BrandName}.");
             }
         }
     }

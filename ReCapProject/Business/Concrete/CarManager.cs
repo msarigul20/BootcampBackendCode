@@ -25,7 +25,8 @@ namespace Business.Concrete
             }
             else
             {
-                Console.WriteLine($"Car did not add the database because the daily price must be positive integer. You entered :{car.DailyPrice}.");
+                Console.WriteLine($"Car did not add the database because the daily price must be positive integer. " +
+                    $"You entered :{car.DailyPrice}.");
             }
         }
 
@@ -74,27 +75,9 @@ namespace Business.Concrete
             }
             else
             {
-                Console.WriteLine($"Car did not update the database because the daily price must be positive integer. You entered :{car.DailyPrice}.");
+                Console.WriteLine($"Car did not update the database because the daily price must be positive integer. " +
+                    $"You entered :{car.DailyPrice}.");
             }
         }
-        /*
-
-
-
-public List<Car> GetAll()
-{
-  return _carDal.GetAll();
-}
-
-public List<Car> GetCarsByBrandId(int id)
-{
-   return _carDal.GetAll(c => c.BrandId == id);
-}
-
-public List<Car> GetCarsByColorId(int id)
-{
-   return _carDal.GetAll(c => c.ColorId == id);
-}
-*/
     }
 }

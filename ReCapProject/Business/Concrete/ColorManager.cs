@@ -43,5 +43,6 @@ namespace Business.Concrete
             _colorDal.Update(color);
             Console.WriteLine("Color updated succesfully.");
         }
+        
     }
 }

@@ -13,10 +13,14 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Color entity)
         {
+            //IDisposable pattern implementation of C# to gain memory speed by triggering garbage collector after terminating snippet.
             using (CarDbContext context = new CarDbContext())
             {
+                //Catch the reference
                 var addedEntity = context.Entry(entity);
+                //Its object that will add.
                 addedEntity.State = EntityState.Added;
+                //Save all changes.(Added really)
                 context.SaveChanges();
             }
         }
@@ -46,7 +50,6 @@ namespace DataAccess.Concrete.EntityFramework
                 return filter == null ? context.Set<Color>().ToList() : context.Set<Color>().Where(filter).ToList();
             }
         }
-
         public void Update(Color entity)
         {
             using (CarDbContext context = new CarDbContext())

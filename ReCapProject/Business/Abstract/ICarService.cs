@@ -7,7 +7,6 @@ namespace Business.Abstract
 {
     public interface ICarService
     {
-
         void Add(Car car);
         void Delete(Car car);
         void Update(Car car);
@@ -17,7 +16,5 @@ namespace Business.Abstract
         List<Car> GetCarsByColorId(int id);
         List<Car> GetCarsByDailyPrice(decimal min, decimal max);
         List<Car> GetCarsByModelYear(string modelYear);
-
-
     }
 }

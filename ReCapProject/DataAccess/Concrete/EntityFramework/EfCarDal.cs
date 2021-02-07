@@ -54,7 +54,6 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Update(Car entitiy)
         {
-            //IDisposable pattern implementation of C# to gain memory speed by triggering garbage collector after terminating snippet.
             using (CarDbContext context = new CarDbContext())
             {
                 var updatedEntity = context.Entry(entitiy);
