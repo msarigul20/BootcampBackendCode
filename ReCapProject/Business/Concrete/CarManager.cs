@@ -16,9 +16,33 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        public void Add(Car car)
+        {
+            if (car.DailyPrice > 0)
+            {
+                Console.WriteLine("Car added succesfully.");
+                _carDal.Add(car);
+            }
+            else
+            {
+                Console.WriteLine($"Car did not add the database because the daily price must be positive integer. You entered :{car.DailyPrice}.");
+            }
+        }
+
+        public void Delete(Car car)
+        {
+            Console.WriteLine($"The car that is id of {car.CarId} has been deleted succesfully.");
+            _carDal.Delete(car);
+        }
+
         public List<Car> GetAll()
         {
-           return _carDal.GetAll();
+            return _carDal.GetAll();
+        }
+
+        public Car GetCarById(int id)
+        {
+            return _carDal.Get(c => c.CarId == id);
         }
 
         public List<Car> GetCarsByBrandId(int id)
@@ -31,70 +55,46 @@ namespace Business.Concrete
             return _carDal.GetAll(c => c.ColorId == id);
         }
 
-
-
-
-
-
-
-
-
-        //My old codes to storage
-        /*
-        public List<Car> GetAllCars()
+        public List<Car> GetCarsByDailyPrice(decimal min, decimal max)
         {
-            //It is my business rule.
-            //The rule of the authorities is to show all cars, the total number of cars must be 5 or more.
-            //Don't show any cars if request doesn't follow the rule.
-            if (_carDal.CountCars() >= 5)
+            return _carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max);
+        }
+
+        public List<Car> GetCarsByModelYear(string modelYear)
+        {
+            return _carDal.GetAll(c => c.ModelYear.Contains(modelYear));
+        }
+
+        public void Update(Car car)
+        {
+            if (car.DailyPrice > 0)
             {
-                //For checking 
-                Console.WriteLine("Total number of cars : " + _carDal.CountCars() + ". So that you passed the business rule.");
-                return _carDal.GetAll();
+                Console.WriteLine("Car updated succesfully.");
+                _carDal.Update(car);
             }
             else
             {
-                //For checking the rule
-                Console.WriteLine("Total number of cars : " + _carDal.CountCars() + ". So that you did not pass the business rule.");
-                Console.WriteLine("The total car numbers should be 5 or more. Please add new car(s).");
-                return null; 
+                Console.WriteLine($"Car did not update the database because the daily price must be positive integer. You entered :{car.DailyPrice}.");
             }
         }
+        /*
 
-        public void GetCarWithId(int carId)
-        {
-            //It is my other business rule.
-            //The rule of the authorities is to search by id if the total number of cars not more than 10.
-            //Don't force the system if there are cars more than 10 and send error message for uprading.
-            try
-            {
-                if (_carDal.CountCars() < 10)
-                {
 
-                    Console.WriteLine("**** -- SEARCHED BY ID ==> " + _carDal.GetById(carId).Id + "  -- *******");
-                    //Used the object to trigger the exception codes before write anything on console.
-                    Console.WriteLine("The car information is below about your Car : ");
-                    Console.WriteLine("Car Id : " + _carDal.GetById(carId).Id);
-                    Console.WriteLine("Car Brand Id : " + _carDal.GetById(carId).BrandId);
-                    Console.WriteLine("Car Color Id : " + _carDal.GetById(carId).ColorId);
-                    Console.WriteLine("Car Daily Price : " + _carDal.GetById(carId).DailyPrice + " TL");
-                    Console.WriteLine("Car Model Year : " + _carDal.GetById(carId).ModelYear);
-                    Console.WriteLine("Car Description : " + _carDal.GetById(carId).Description);
-                    Console.WriteLine("****************************************************");
-                }
-                else
-                {
-                    Console.WriteLine("Your account is using lower pack and you have 10 cars " +
-                        "so that you need to upgrade your pack to filter as id of car.");
 
-                }
-            }
-            catch (NullReferenceException)
-            {
+public List<Car> GetAll()
+{
+  return _carDal.GetAll();
+}
 
-                Console.WriteLine("Id that entered in ConsoleUI did not find in cars.");
-            }
-        }
-        */
+public List<Car> GetCarsByBrandId(int id)
+{
+   return _carDal.GetAll(c => c.BrandId == id);
+}
+
+public List<Car> GetCarsByColorId(int id)
+{
+   return _carDal.GetAll(c => c.ColorId == id);
+}
+*/
     }
 }

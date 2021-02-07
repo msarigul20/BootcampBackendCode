@@ -23,17 +23,17 @@ namespace DataAccess.Concrete.InMemory
         {
             _cars = new List<Car>
             {
-                new Car{Id=1,BrandId=1,ColorId=1,DailyPrice=100, ModelYear="2018",Description= "Fiat Egea Sedan 4 Kapı 120.000km Dizel Otomatik Vites 25 Yaş Sınırı"},
-                new Car{Id=2,BrandId=2,ColorId=2,DailyPrice=150, ModelYear="2019",Description= "Renault Clio Hatchback 4 Kapı 80.000km Benzin Düz Vites 22 Yaş Sınırı"},
-                new Car{Id=3,BrandId=3,ColorId=1,DailyPrice=80, ModelYear="2016",Description= "Hyundai i20 Hatchback 4 Kapı 290.000km LPG-Benzin Düz Vites 18 Yaş Sınırı"},
-                new Car{Id=4,BrandId=1,ColorId=3,DailyPrice=250, ModelYear="2020",Description= "Fiat 124 Spider Cabrio 2 Kapı 30.000km Benzin Otomatik Vites 22 Yaş Sınırı"},
-                new Car{Id=5,BrandId=4,ColorId=4,DailyPrice=225, ModelYear="2019",Description= "Nissan Qashqai SUV 4 Kapı 100.000km Dizel Düz Vites 20 Yaş Sınırı"},
+                new Car{CarId=1,BrandId=1,ColorId=1,DailyPrice=100, ModelYear="2018",Descriptions= "Fiat Egea Sedan 4 Kapı 120.000km Dizel Otomatik Vites 25 Yaş Sınırı"},
+                new Car{CarId=2,BrandId=2,ColorId=2,DailyPrice=150, ModelYear="2019",Descriptions= "Renault Clio Hatchback 4 Kapı 80.000km Benzin Düz Vites 22 Yaş Sınırı"},
+                new Car{CarId=3,BrandId=3,ColorId=1,DailyPrice=80, ModelYear="2016",Descriptions= "Hyundai i20 Hatchback 4 Kapı 290.000km LPG-Benzin Düz Vites 18 Yaş Sınırı"},
+                new Car{CarId=4,BrandId=1,ColorId=3,DailyPrice=250, ModelYear="2020",Descriptions= "Fiat 124 Spider Cabrio 2 Kapı 30.000km Benzin Otomatik Vites 22 Yaş Sınırı"},
+                new Car{CarId=5,BrandId=4,ColorId=4,DailyPrice=225, ModelYear="2019",Descriptions= "Nissan Qashqai SUV 4 Kapı 100.000km Dizel Düz Vites 20 Yaş Sınırı"},
                 //To test business rules.
-                //new Car{Id=6,BrandId=1,ColorId=1,DailyPrice=100, ModelYear="2018",Description= "Fiat Egea Sedan 4 Kapı 120.000km Dizel Otomatik Vites 25 Yaş Sınırı"},
-                //new Car{Id=7,BrandId=2,ColorId=2,DailyPrice=150, ModelYear="2019",Description= "Renault Clio Hatchback 4 Kapı 80.000km Benzin Düz Vites 22 Yaş Sınırı"},
-                //new Car{Id=8,BrandId=3,ColorId=1,DailyPrice=80, ModelYear="2016",Description= "Hyundai i20 Hatchback 4 Kapı 290.000km LPG-Benzin Düz Vites 18 Yaş Sınırı"},
-                //new Car{Id=9,BrandId=1,ColorId=3,DailyPrice=250, ModelYear="2020",Description= "Fiat 124 Spider Cabrio 2 Kapı 30.000km Benzin Otomatik Vites 22 Yaş Sınırı"},
-                //new Car{Id=10,BrandId=4,ColorId=4,DailyPrice=225, ModelYear="2019",Description= "Nissan Qashqai SUV 4 Kapı 100.000km Dizel Düz Vites 20 Yaş Sınırı"}
+                //new Car{CarId=6,BrandId=1,ColorId=1,DailyPrice=100, ModelYear="2018",Descriptions= "Fiat Egea Sedan 4 Kapı 120.000km Dizel Otomatik Vites 25 Yaş Sınırı"},
+                //new Car{CarId=7,BrandId=2,ColorId=2,DailyPrice=150, ModelYear="2019",Descriptions= "Renault Clio Hatchback 4 Kapı 80.000km Benzin Düz Vites 22 Yaş Sınırı"},
+                //new Car{CarId=8,BrandId=3,ColorId=1,DailyPrice=80, ModelYear="2016",Descriptions= "Hyundai i20 Hatchback 4 Kapı 290.000km LPG-Benzin Düz Vites 18 Yaş Sınırı"},
+                //new Car{CarId=9,BrandId=1,ColorId=3,DailyPrice=250, ModelYear="2020",Descriptions= "Fiat 124 Spider Cabrio 2 Kapı 30.000km Benzin Otomatik Vites 22 Yaş Sınırı"},
+                //new Car{CarId=10,BrandId=4,ColorId=4,DailyPrice=225, ModelYear="2019",Descriptions= "Nissan Qashqai SUV 4 Kapı 100.000km Dizel Düz Vites 20 Yaş Sınırı"}
 
             };
         }
@@ -49,7 +49,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Delete(Car car)
         {
-            Car carToDelete = _cars.SingleOrDefault(c => c.Id == car.Id);
+            Car carToDelete = _cars.SingleOrDefault(c => c.CarId == car.CarId);
             _cars.Remove(carToDelete);   
         }
 
@@ -60,14 +60,14 @@ namespace DataAccess.Concrete.InMemory
 
         public Car GetById(int carId)
         {
-            return _cars.SingleOrDefault(c => c.Id == carId);
+            return _cars.SingleOrDefault(c => c.CarId == carId);
         }
 
         public void Update(Car car)
         {
-            Car carToUpdate = _cars.SingleOrDefault(c => c.Id == car.Id);
+            Car carToUpdate = _cars.SingleOrDefault(c => c.CarId == car.CarId);
             carToUpdate.DailyPrice = car.DailyPrice;
-            carToUpdate.Description = car.Description;
+            carToUpdate.Descriptions = car.Descriptions;
         }
 
 

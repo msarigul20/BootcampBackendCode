@@ -1,16 +1,16 @@
 ﻿
 CREATE TABLE Colors(
-	ColorId int PRIMARY KEY IDENTITY(1,1),
+	ColorId int PRIMARY KEY IDENTITY(1000,1),
 	ColorName nvarchar(30),
 )
 
 CREATE TABLE Brands(
-	BrandId int PRIMARY KEY IDENTITY(1,1),
+	BrandId int PRIMARY KEY IDENTITY(1000,1),
 	BrandName nvarchar(30),
 )
 
 CREATE TABLE Cars(
-	CarId int PRIMARY KEY IDENTITY(1,1),
+	CarId int PRIMARY KEY IDENTITY(1000,1),
 	BrandId int,
 	ColorId int,
 	ModelYear nvarchar(4),
