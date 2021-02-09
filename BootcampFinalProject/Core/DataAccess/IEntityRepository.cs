@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
-using Entities.Abstract;
-namespace DataAccess.Abstract
+
+namespace Core.DataAccess
 {
-
-
     /* 
      * Generic Constraint (Limit Type of Generic Class)
      * Class: means it must be reference type (ignored int, string, decimal, etc.)
@@ -14,6 +13,12 @@ namespace DataAccess.Abstract
      * new(): means it must be non-abstract object such that we can crate object with new key.(ignored IEntity class {interface} because of the abstract architecture.)
      * There are just classes that are located concrete folder that is connected to Entities classes such as Category, Customer and Product for now.
      * There are symbolised the tables of database that called our entities.
+     */
+
+    /*
+     * Core layer DOES NOT take a reference from other layers. (STAR NOTE)
+     * If it takes a reference, core layer will dependent on the layer that takes a reference.
+     * This means that you can not generate universal section to use different independent of each other projects.
      */
     public interface IEntityRepository<T> where T : class, IEntity, new()
     {
