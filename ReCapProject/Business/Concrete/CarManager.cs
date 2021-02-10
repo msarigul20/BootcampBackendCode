@@ -16,6 +16,42 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        public void Add(Car car)
+        {
+            if (car.DailyPrice > 0)
+            {
+                _carDal.Add(car);
+                Console.WriteLine($"The car that is id of {car.CarId} has been added succesfully.");
+            }
+            else
+            {
+                Console.WriteLine($"Car did not add the database because the daily price must be positive integer. " +
+                    $"You entered :{car.DailyPrice}.");
+            }
+        }
+
+        public void Delete(Car car)
+        {
+            
+            _carDal.Delete(car);
+            Console.WriteLine($"The car that is id of {car.CarId} has been deleted succesfully.");
+        }
+
+        public void Update(Car car)
+        {
+            if (car.DailyPrice > 0)
+            {
+                _carDal.Update(car);
+                Console.WriteLine($"The car that is id of {car.CarId} has been updated succesfully.");
+            }
+            else
+            {
+                Console.WriteLine($"Car did not update the database because the daily price must be positive integer. " +
+                    $"You entered :{car.DailyPrice}.");
+            }
+        }
+
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
@@ -46,5 +82,6 @@ namespace Business.Concrete
             return _carDal.GetAll(c => c.ModelYear.Contains(modelYear));
         }
 
+    
     }
 }

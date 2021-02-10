@@ -12,8 +12,8 @@ namespace ConsoleUI
             ProductTest();
             //TO DO What is the IoC? Search it!
             //CategoryTest();
-
-        }
+            
+        }   
 
         private static void CategoryTest()
         {

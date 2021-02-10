@@ -11,8 +11,6 @@ using Core.DataAccess.EntityFramework;
 namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car,CarDbContext>, ICarDal
-  
-
     {
         
     }
