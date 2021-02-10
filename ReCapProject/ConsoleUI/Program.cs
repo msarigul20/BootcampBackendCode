@@ -24,8 +24,22 @@ namespace ConsoleUI
             //ClearLastBrand(brandManager, 2);
             //TestCarCRUDOperations(carManager,8,6,"2018",230,"Added Operation is working!!!");
             //ClearLastCar(carManager, 2);
+            //GetCarsDetail(carManager);
 
         }
+
+        private static void GetCarsDetail(CarManager carManager)
+        {
+            Console.WriteLine("------------------------------------------------------");
+            Console.WriteLine("| Car Id | Brand Name   | Color Name   | Daily Price |");
+            Console.WriteLine("------------------------------------------------------");
+            foreach (var car in carManager.GetCarDetails())
+            {
+                Console.WriteLine(String.Format("|{0,-7} | {1,-12} | {2,-12} | {3,12}|", " " + car.CarId, car.BrandName, car.ColorName, car.DailyPrice + " TL"));
+            }
+            Console.WriteLine("------------------------------------------------------");
+        }
+
         //Test Color Mehtods
         private static void TestColorCRUDOperations(ColorManager colorManager, string colorNameToAdd)
         {
@@ -83,10 +97,7 @@ namespace ConsoleUI
             }
             
         }
-
-
         
-
         //Test Brand Mehtods
         private static void TestBrandCRUDOperations(BrandManager brandManager, string brandNameToAdd)
         {
@@ -146,7 +157,7 @@ namespace ConsoleUI
 
         }
 
-
+        //Test Car Mehtods
         private static void TestCarCRUDOperations(CarManager carManager, int brandId, int colorId, string modelYear, decimal dailyPrice, string descriptions )
         {
             //Added new colors to test our CRUD operations as comes parameter, Will Update and Will Delete.
