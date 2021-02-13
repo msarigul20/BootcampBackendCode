@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Entities.DTOs;
+using Core.Utilities.Results;
 
 namespace Business.Abstract
 {
@@ -15,5 +16,9 @@ namespace Business.Abstract
         List<Car> GetCarsByDailyPrice(decimal min, decimal max);
         List<Car> GetCarsByModelYear(string modelYear);
         List<CarDetailDto> GetCarDetails();
+        IResult Add(Car car);
+        IResult Update(Car car);
+        IResult Delete(Car car);
+
     }
 }

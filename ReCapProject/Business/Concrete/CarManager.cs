@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -17,39 +19,44 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
-            if (car.DailyPrice > 0)
+            if (car.DailyPrice < 0 )
             {
-                _carDal.Add(car);
-                Console.WriteLine($"The car that is id of {car.CarId} has been added succesfully.");
+                /*Console.WriteLine($"Car did not add the database because the daily price must be positive integer. " +
+                    $"You entered :{car.DailyPrice}.");*/
+
+                return new ErrorResult(Messages.CarDailyPriceInvalid);
             }
-            else
-            {
-                Console.WriteLine($"Car did not add the database because the daily price must be positive integer. " +
-                    $"You entered :{car.DailyPrice}.");
-            }
+            
+            _carDal.Add(car);
+
+            //Console.WriteLine($"The car that is id of {car.CarId} has been added succesfully.");
+            return new SuccessResult(Messages.CarAdded);
         }
 
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
             
             _carDal.Delete(car);
-            Console.WriteLine($"The car that is id of {car.CarId} has been deleted succesfully.");
+            //Console.WriteLine($"The car that is id of {car.CarId} has been deleted succesfully.");
+            return new SuccessResult(Messages.CarDeleted);
         }
 
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
-            if (car.DailyPrice > 0)
+            if (car.DailyPrice < 0)
             {
-                _carDal.Update(car);
-                Console.WriteLine($"The car that is id of {car.CarId} has been updated succesfully.");
+                return new ErrorResult(Messages.CarDailyPriceInvalid);
+                //Console.WriteLine($"The car that is id of {car.CarId} has been updated succesfully.");
             }
-            else
-            {
-                Console.WriteLine($"Car did not update the database because the daily price must be positive integer. " +
-                    $"You entered :{car.DailyPrice}.");
-            }
+
+            /*Console.WriteLine($"Car did not update the database because the daily price must be positive integer. " +
+                $"You entered :{car.DailyPrice}.");*/
+
+            _carDal.Update(car);
+            return new SuccessResult(Messages.CarUpdated);
+
         }
 
 

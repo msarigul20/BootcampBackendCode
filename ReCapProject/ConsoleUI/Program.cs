@@ -28,6 +28,10 @@ namespace ConsoleUI
 
         }
 
+
+
+
+
         private static void GetCarsDetail(CarManager carManager)
         {
             Console.WriteLine("------------------------------------------------------");
