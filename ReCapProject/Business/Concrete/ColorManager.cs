@@ -35,14 +35,14 @@ namespace Business.Concrete
             //Console.WriteLine($"The color that is id of {color.ColorId} has been deleted succesfully.");
         }
 
-        public List<Color> GetAll()
+        public IDataResult<List<Color>> GetAll()
         {
-            return _colorDal.GetAll();
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
         }
 
-        public Color GetColorById(int id)
+        public IDataResult<Color> GetColorById(int id)
         {
-            return _colorDal.Get(c => c.ColorId == id);
+            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == id));
         }
 
         public IResult Update(Color color)

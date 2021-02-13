@@ -60,39 +60,40 @@ namespace Business.Concrete
         }
 
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll();
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
-        public Car GetCarById(int id)
+        public IDataResult<Car> GetCarById(int id)
         {
-            return _carDal.Get(c => c.CarId == id);
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == id));
         }
 
-        public List<Car> GetCarsByBrandId(int id)
+        public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return _carDal.GetAll(c => c.BrandId == id);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id));
         }
 
-        public List<Car> GetCarsByColorId(int id)
+        public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
-            return _carDal.GetAll(c => c.ColorId == id);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id));
         }
 
-        public List<Car> GetCarsByDailyPrice(decimal min, decimal max)
+        public IDataResult<List<Car>> GetCarsByDailyPrice(decimal min, decimal max)
         {
-            return _carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));
         }
 
-        public List<Car> GetCarsByModelYear(string modelYear)
+        public IDataResult<List<Car>> GetCarsByModelYear(string modelYear)
         {
-            return _carDal.GetAll(c => c.ModelYear.Contains(modelYear));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ModelYear.Contains(modelYear)));
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return _carDal.GetProductDetails();
+             _carDal.GetProductDetails();
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetProductDetails());
         }
     }
 }

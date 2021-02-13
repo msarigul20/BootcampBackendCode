@@ -37,7 +37,7 @@ namespace ConsoleUI
             Console.WriteLine("------------------------------------------------------");
             Console.WriteLine("| Car Id | Brand Name   | Color Name   | Daily Price |");
             Console.WriteLine("------------------------------------------------------");
-            foreach (var car in carManager.GetCarDetails())
+            foreach (var car in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine(String.Format("|{0,-7} | {1,-12} | {2,-12} | {3,12}|", " " + car.CarId, car.BrandName, car.ColorName, car.DailyPrice + " TL"));
             }
@@ -54,13 +54,13 @@ namespace ConsoleUI
             colorManager.Add(new Color() { ColorName = "Will Delete" });
             Console.WriteLine("-------------------------------------------------------------------------");
             Console.WriteLine("Added new color that entered by you." + " \n"+ 
-                              " Color Id: {0} \n ColorName {1}", colorManager.GetColorById(colorManager.GetAll()[colorManager.GetAll().Count - 3].ColorId).ColorId,
-                                                                 colorManager.GetColorById(colorManager.GetAll()[colorManager.GetAll().Count - 3].ColorId).ColorName);
+                              " Color Id: {0} \n ColorName {1}", colorManager.GetColorById(colorManager.GetAll().Data[colorManager.GetAll().Data.Count - 3].ColorId).Data.ColorId,
+                                                                 colorManager.GetColorById(colorManager.GetAll().Data[colorManager.GetAll().Data.Count - 3].ColorId).Data.ColorName);
             Console.WriteLine("------------------------------------------------------------------------");
             //Printed all list
             Console.WriteLine(" ********************************* 1.PRİNT ALL (After Adding Colors) *******************************************");
             Console.WriteLine("ColorId\tColorName\t\b\b");
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine($"{color.ColorId}" +
                     $"\t{color.ColorName}" +
@@ -70,10 +70,10 @@ namespace ConsoleUI
             //Deleted the color that has last index of its table (named Will Delete) by using getColorByID method.
             //I am using count - 1 to access last row index so that I accessed the last color id and could give exact id to GetColorById. 
             //Finally. Delete method takes last color in the list. 
-            colorManager.Delete(colorManager.GetColorById(colorManager.GetAll()[colorManager.GetAll().Count-1].ColorId));
+            colorManager.Delete(colorManager.GetColorById(colorManager.GetAll().Data[colorManager.GetAll().Data.Count-1].ColorId).Data);
             Console.WriteLine(" ********************************* 2.PRİNT ALL (After Deleting Related Color) *******************************************");
             Console.WriteLine("ColorId\tColorName\t\b\b");
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine($"{color.ColorId}" +
                     $"\t{color.ColorName}" +
@@ -81,10 +81,10 @@ namespace ConsoleUI
             }
             Console.WriteLine("***********************************************************************************");
             //Updated our color.
-            colorManager.Update(new Color() { ColorId = colorManager.GetAll()[colorManager.GetAll().Count - 1].ColorId, ColorName = "Color UPDATED!"});
+            colorManager.Update(new Color() { ColorId = colorManager.GetAll().Data[colorManager.GetAll().Data.Count - 1].ColorId, ColorName = "Color UPDATED!"});
             Console.WriteLine(" ********************************* 3.PRİNT ALL (After Updating Related Color) *******************************************");
             Console.WriteLine("ColorId\tColorName\t\b\b");
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine($"{color.ColorId}" +
                     $"\t{color.ColorName}" +
@@ -97,7 +97,7 @@ namespace ConsoleUI
         private static void ClearLastColor(ColorManager colorManager, int howMantTimes) {
             for (int i = 1; i <= howMantTimes; i++)
             {
-                colorManager.Delete(colorManager.GetAll()[colorManager.GetAll().Count - 1]);
+                colorManager.Delete(colorManager.GetAll().Data[colorManager.GetAll().Data.Count - 1]);
             }
             
         }
@@ -112,13 +112,13 @@ namespace ConsoleUI
             brandManager.Add(new Brand() { BrandName = "Will Delete" });
             Console.WriteLine("-------------------------------------------------------------------------");
             Console.WriteLine("Added new brand that entered by you." + " \n" +
-                              " BrandId: {0} \n BrandName {1}", brandManager.GetBrandById(brandManager.GetAll()[brandManager.GetAll().Count - 3].BrandId).BrandId,
-                                                                 brandManager.GetBrandById(brandManager.GetAll()[brandManager.GetAll().Count - 3].BrandId).BrandName);
+                              " BrandId: {0} \n BrandName {1}", brandManager.GetBrandById(brandManager.GetAll().Data[brandManager.GetAll().Data.Count - 3].BrandId).Data.BrandId,
+                                                                 brandManager.GetBrandById(brandManager.GetAll().Data[brandManager.GetAll().Data.Count - 3].BrandId).Data.BrandName);
             Console.WriteLine("------------------------------------------------------------------------");
             //Printed all list
             Console.WriteLine(" ********************************* 1.PRİNT ALL (After Adding Brands) *******************************************");
             Console.WriteLine("BrandId\tBrandName\t\b\b");
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine($"{brand.BrandId}" +
                     $"\t{brand.BrandName}" +
@@ -128,10 +128,10 @@ namespace ConsoleUI
             //Deleted the color that has last index of its table (named Will Delete) by using getColorByID method.
             //I am using count - 1 to access last row index so that I accessed the last color id and could give exact id to GetColorById. 
             //Finally. Delete method takes last color in the list. 
-            brandManager.Delete(brandManager.GetBrandById(brandManager.GetAll()[brandManager.GetAll().Count - 1].BrandId));
+            brandManager.Delete(brandManager.GetBrandById(brandManager.GetAll().Data[brandManager.GetAll().Data.Count - 1].BrandId).Data);
             Console.WriteLine(" ********************************* 2.PRİNT ALL (After Deleting Related Brand) *******************************************");
             Console.WriteLine("BrandId\tBrandName\t\b\b");
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine($"{brand.BrandId}" +
                     $"\t{brand.BrandName}" +
@@ -139,10 +139,10 @@ namespace ConsoleUI
             }
             Console.WriteLine("***********************************************************************************");
             //Updated our color.
-            brandManager.Update(new Brand() { BrandId = brandManager.GetAll()[brandManager.GetAll().Count - 1].BrandId,  BrandName= "Brand UPDATED!" });
+            brandManager.Update(new Brand() { BrandId = brandManager.GetAll().Data[brandManager.GetAll().Data.Count - 1].BrandId,  BrandName= "Brand UPDATED!" });
             Console.WriteLine(" ********************************* 3.PRİNT ALL (After Updating Related Brand) *******************************************");
             Console.WriteLine("BrandId\tBrandName\t\b\b");
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine($"{brand.BrandId}" +
                     $"\t{brand.BrandName}" +
@@ -156,7 +156,7 @@ namespace ConsoleUI
         {
             for (int i = 1; i <= howMantTimes; i++)
             {
-                brandManager.Delete(brandManager.GetAll()[brandManager.GetAll().Count - 1]);
+                brandManager.Delete(brandManager.GetAll().Data[brandManager.GetAll().Data.Count - 1]);
             }
 
         }
@@ -173,18 +173,18 @@ namespace ConsoleUI
             Console.WriteLine("-------------------------------------------------------------------------");
             Console.WriteLine("Added new CAR that entered by you." + " \n" +
                               " Car Id: {0} \n BrandId {1} \n ColorId {2} \n ModelYear {3} \n DailyPrice {4} \n Descriptions {5}", 
-                              carManager.GetCarById(carManager.GetAll()[carManager.GetAll().Count - 3].CarId).CarId,
-                              carManager.GetCarById(carManager.GetAll()[carManager.GetAll().Count - 3].CarId).BrandId,
-                              carManager.GetCarById(carManager.GetAll()[carManager.GetAll().Count - 3].CarId).ColorId,
-                              carManager.GetCarById(carManager.GetAll()[carManager.GetAll().Count - 3].CarId).ModelYear,
-                              carManager.GetCarById(carManager.GetAll()[carManager.GetAll().Count - 3].CarId).DailyPrice,
-                              carManager.GetCarById(carManager.GetAll()[carManager.GetAll().Count - 3].CarId).Descriptions
+                              carManager.GetCarById(carManager.GetAll().Data[carManager.GetAll().Data.Count - 3].CarId).Data.CarId,
+                              carManager.GetCarById(carManager.GetAll().Data[carManager.GetAll().Data.Count - 3].CarId).Data.BrandId,
+                              carManager.GetCarById(carManager.GetAll().Data[carManager.GetAll().Data.Count - 3].CarId).Data.ColorId,
+                              carManager.GetCarById(carManager.GetAll().Data[carManager.GetAll().Data.Count - 3].CarId).Data.ModelYear,
+                              carManager.GetCarById(carManager.GetAll().Data[carManager.GetAll().Data.Count - 3].CarId).Data.DailyPrice,
+                              carManager.GetCarById(carManager.GetAll().Data[carManager.GetAll().Data.Count - 3].CarId).Data.Descriptions
                               );
             Console.WriteLine("------------------------------------------------------------------------");
             //Printed all list
             Console.WriteLine(" ********************************* 1.PRİNT ALL (After Adding Cars) *******************************************");
             Console.WriteLine("CarId\t BrandId\t ColorId\t ModelYear\t DailyPrice\t Descriptions\t\b\b");
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetAll().Data)
             {
                 Console.WriteLine($"{car.CarId}" +
                     $"\t{car.BrandId}" +
@@ -198,10 +198,10 @@ namespace ConsoleUI
             //Deleted the color that has last index of its table (named Will Delete) by using getColorByID method.
             //I am using count - 1 to access last row index so that I accessed the last color id and could give exact id to GetColorById. 
             //Finally. Delete method takes last color in the list. 
-            carManager.Delete(carManager.GetCarById(carManager.GetAll()[carManager.GetAll().Count - 1].CarId));
+            carManager.Delete(carManager.GetCarById(carManager.GetAll().Data[carManager.GetAll().Data.Count - 1].CarId).Data);
             Console.WriteLine(" ********************************* 2.PRİNT ALL (After Deleting Related Car) *******************************************");
             Console.WriteLine("CarId\t BrandId\t ColorId\t ModelYear\t DailyPrice\t Descriptions\t\b\b");
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetAll().Data)
             {
                 Console.WriteLine($"{car.CarId}" +
                     $"\t{car.BrandId}" +
@@ -213,16 +213,16 @@ namespace ConsoleUI
             }
             Console.WriteLine("***********************************************************************************");
             //Updated our color.
-            carManager.Update(new Car() { CarId = carManager.GetAll()[carManager.GetAll().Count - 1].CarId, 
-                BrandId = carManager.GetAll()[carManager.GetAll().Count - 1].BrandId, 
-                ColorId = carManager.GetAll()[carManager.GetAll().Count - 1].ColorId,
+            carManager.Update(new Car() { CarId = carManager.GetAll().Data[carManager.GetAll().Data.Count - 1].CarId, 
+                BrandId = carManager.GetAll().Data[carManager.GetAll().Data.Count - 1].BrandId, 
+                ColorId = carManager.GetAll().Data[carManager.GetAll().Data.Count - 1].ColorId,
                 DailyPrice = 435,
-                ModelYear = carManager.GetAll()[carManager.GetAll().Count - 1].ModelYear,
+                ModelYear = carManager.GetAll().Data[carManager.GetAll().Data.Count - 1].ModelYear,
                 Descriptions = "Updated Car Desc."
             });
             Console.WriteLine(" ********************************* 3.PRİNT ALL (After Updating Related Car) *******************************************");
             Console.WriteLine("CarId\t BrandId\t ColorId\t ModelYear\t DailyPrice\t Descriptions\t\b\b");
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetAll().Data)
             {
                 Console.WriteLine($"{car.CarId}" +
                     $"\t{car.BrandId}" +
@@ -240,7 +240,7 @@ namespace ConsoleUI
         {
             for (int i = 1; i <= howMantTimes; i++)
             {
-                carManager.Delete(carManager.GetAll()[carManager.GetAll().Count - 1]);
+                carManager.Delete(carManager.GetAll().Data[carManager.GetAll().Data.Count - 1]);
             }
 
         }

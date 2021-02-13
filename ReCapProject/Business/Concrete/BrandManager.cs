@@ -53,14 +53,14 @@ namespace Business.Concrete
         }
 
 
-        public List<Brand> GetAll()
+        public IDataResult<List<Brand>> GetAll()
         {
-            return _brandDal.GetAll();
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.BrandListed);
         }
 
-        public Brand GetBrandById(int id)
+        public IDataResult<Brand> GetBrandById(int id)
         {
-            return _brandDal.Get(b => b.BrandId == id);
+            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == id));
         }
         
     }
