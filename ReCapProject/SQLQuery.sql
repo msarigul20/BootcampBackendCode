@@ -74,4 +74,28 @@ INSERT INTO Cars(BrandId,ColorId,ModelYear,DailyPrice,Descriptions) VALUES
 	('9','4','2020','525','530 Sedan 4 Kapı 50.000km Benzin Otomatik 25 Yaş Sınırı');
 
 
+CREATE TABLE Users(
+	Id int PRIMARY KEY IDENTITY(1,1),
+	FirstName nvarchar(30),
+	LastName nvarchar(30),
+	Email nvarchar(50),
+	[Password] nvarchar(30),
+)
 
+CREATE TABLE Customers(
+	Id int PRIMARY KEY IDENTITY(1,1),
+	UserId int,
+	CompanyName nvarchar(50),
+	FOREIGN KEY (UserId) REFERENCES Users(Id)
+)
+
+CREATE TABLE Rentals(
+	Id int PRIMARY KEY IDENTITY(1,1),
+	CarId int,
+	CustomerId int,
+	RentalDate datetime,
+	ReturnDate datetime,
+
+	FOREIGN KEY (CarId) REFERENCES Cars(CarId),
+	FOREIGN KEY (CustomerId) REFERENCES Customers(Id)
+)
