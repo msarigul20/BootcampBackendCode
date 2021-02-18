@@ -93,9 +93,35 @@ CREATE TABLE Rentals(
 	Id int PRIMARY KEY IDENTITY(1,1),
 	CarId int,
 	CustomerId int,
-	RentalDate datetime,
+	RentDate datetime,
 	ReturnDate datetime,
 
 	FOREIGN KEY (CarId) REFERENCES Cars(CarId),
 	FOREIGN KEY (CustomerId) REFERENCES Customers(Id)
 )
+
+--Delete from Users;
+
+INSERT INTO Users(FirstName,LastName,Email,[Password]) VALUES
+	('Mustafa','Sarigul','CeMustafa@gmail.com','ComputerScience'),
+	('Ronaldo','Cristiano','cr7@gmail.com','PortekizGolcusu123'),
+	('Messi','Lionel','m10@gmail.com','ArjantinKahramani321'),
+	('Mbappe','Kylian','fKM7@gmail.com','French7Player'),
+	('İbrahim','Tatlıses','iboshow@gmail.com','HalayBasi'),
+	('Vivaldi','Antonio','vivaldi>mozart@gmail.com','4season');
+
+INSERT INTO Customers(UserId,CompanyName) VALUES 
+	('28','MySelf Company'),
+	('29','SportZone Company'),
+	('30','SportZone Company'),
+	('31','SportZone Company'),
+	('32','IboShow Company'),
+	('33','Classic Company');
+
+INSERT INTO Rentals (CarId,CustomerId) VALUES
+	('10','1'),
+	('12','5'),
+	('7','4'),
+	('17','6');
+
+
