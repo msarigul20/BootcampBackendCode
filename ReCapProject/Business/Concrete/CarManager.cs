@@ -92,8 +92,8 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-             _carDal.GetProductDetails();
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetProductDetails());
+             _carDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
     }
 }
