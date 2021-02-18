@@ -13,13 +13,14 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
 
-            //defined managers
+            // Defined managers
             CarManager carManager = new CarManager(new EfCarDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
             UserManager userManager = new UserManager(new EfUserDal());
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            
             //TestColorCRUDOperations(colorManager,"Eflatun");
             //ClearLastColor(colorManager,2);
             //TestBrandCRUDOperations(brandManager, "Mercedes");
@@ -27,33 +28,16 @@ namespace ConsoleUI
             //TestCarCRUDOperations(carManager,8,6,"2018",230,"Added Operation is working!!!");
             //ClearLastCar(carManager, 2);
             //GetCarsDetail(carManager);
-            /*
-             * rentalManager.Add(new Rental() { CarId =1, CustomerId=1, RentalDate = DateTime.Now});
-             * rentalManager.Add(new Rental() { CarId = 2, CustomerId = 1, RentalDate = DateTime.Now });
-            */
-
 
             // Wrong rental because of rental can not has return date. (It will not add.)
             // var result =rentalManager.Add(new Rental() {CarId= 10, CustomerId = 4 ,RentDate = DateTime.Now, ReturnDate = DateTime.Now });
            
-            //Correct rental
+            // Correct rental
             // rentalManager.Add(new Rental() { CarId = 3, CustomerId = 3, RentDate = DateTime.Now,ReturnDate=null});
 
-            var result = rentalManager.CompleteRentalByCarId(10);
-            if (result.Success)
-            {
-                Console.WriteLine(Messages);
-                
-            }
-            else
-            {
-                Console.WriteLine("Ekleme gerçekleşmedi. sebebi" + result.Message );
-            }
-            
-            
-            
-        
-        }
+            // To Test Complete rental
+            // var result = rentalManager.CompleteRentalByCarId(10);
+         }
 
         private static void PrintUserToTest(UserManager userManager)
         {

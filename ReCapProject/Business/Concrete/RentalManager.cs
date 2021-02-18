@@ -21,16 +21,19 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            //Eğer parametreden gelen rental ReturnDate 'i null olmazsa, bedava kiralamış gibi olur.
-            //RentalDetail'den null görmediğimiz için o arabayı bizde sanarız.
+            // To Prevent null return date problem:
+            // If ReturnDate is null to add first time, the car can rent as free or 
+            // it seems that already rented but it is not in real. 
+            // When looking the detail, we need to see return date (NOT NULL) immediately after adding process.
             if (rental.ReturnDate!=null)
             {
-                return new ErrorResult("The car must have return date for first adding.");
+                return new ErrorResult(Messages.RentalReturnDateNullCheck);
             }
+            // To prevent to rent car that is already rented.
             var result = _rentalDal.GetRentalDetails((r => r.CarId == rental.CarId && r.ReturnDate==null));
             if (result.Count > 0)
             {
-                return new ErrorResult("The car already rented.");
+                return new ErrorResult(Messages.RentalAlreadyRented);
             }
 
             _rentalDal.Add(rental);
@@ -65,13 +68,15 @@ namespace Business.Concrete
         {
             var result = _rentalDal.GetAll(r => r.CarId == id);
             var updatedRental = result.SingleOrDefault();
+            
+            //To prevent to complete rental that is already completed.
             if (updatedRental.ReturnDate != null)
             {
-                return new ErrorResult("Rental has already return date!");
+                return new ErrorResult(Messages.RentalAlreadyCompleted);
             }
             updatedRental.ReturnDate = DateTime.Now;
             _rentalDal.Update(updatedRental);
-            return new SuccessResult($"Rental ıd number {updatedRental.Id} was updated.");
+            return new SuccessResult(Messages.RentalCompleted);
         }
 
     }

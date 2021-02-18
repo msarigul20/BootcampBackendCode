@@ -46,7 +46,10 @@ namespace Business.Constants
         public static string RentalAdded = "Rental Added.";
         public static string RentalDeleted = "Rental Deleted.";
         public static string RentalListed = "Rental Listed.";
-
+        public static string RentalReturnDateNullCheck = "The rental must have return date to add first time.";
+        public static string RentalAlreadyRented = "The car that you entered id already rented.";
+        public static string RentalAlreadyCompleted = "Rental that related to you entered car id has already completed!";
+        internal static string RentalCompleted = "Rental was completed and car returned succesfully.";
     }
 
 }
