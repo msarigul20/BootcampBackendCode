@@ -6,6 +6,9 @@ namespace Business.Constants
 {
     public static class Messages
     {
+        //System
+        public static string MaintainceTime = "System in maintaince time.";
+
         //Cars
         public static string CarAdded = "New car added.";
         public static string CarsListed = "Cars listed.";
@@ -26,8 +29,23 @@ namespace Business.Constants
         public static string ColorDeleted = "Color Deleted.";
         public static string ColorListed = "Color Listed.";
 
-        //System
-        public static string MaintainceTime = "System in maintaince time.";
+        //Users
+        public static string UserUpdated = "User Updated.";
+        public static string UserAdded = "User Added.";
+        public static string UserDeleted = "User Deleted.";
+        public static string UserListed = "User Listed.";
+
+        //Customers
+        public static string CustomerUpdated = "Customer Updated.";
+        public static string CustomerAdded = "Customer Added.";
+        public static string CustomerDeleted = "Customer Deleted.";
+        public static string CustomerListed = "Customer Listed.";
+
+        //Rentals
+        public static string RentalUpdated = "Rental Updated.";
+        public static string RentalAdded = "Rental Added.";
+        public static string RentalDeleted = "Rental Deleted.";
+        public static string RentalListed = "Rental Listed.";
 
     }
 
