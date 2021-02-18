@@ -19,7 +19,7 @@ namespace ConsoleUI
             ColorManager colorManager = new ColorManager(new EfColorDal());
             UserManager userManager = new UserManager(new EfUserDal());
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
             //TestColorCRUDOperations(colorManager,"Eflatun");
             //ClearLastColor(colorManager,2);
             //TestBrandCRUDOperations(brandManager, "Mercedes");
@@ -28,27 +28,21 @@ namespace ConsoleUI
             //ClearLastCar(carManager, 2);
             //GetCarsDetail(carManager);
             /*
-            UserManager userManager = new UserManager(new EfUserDal());
-            PrintUserToTest(userManager);
-            //userManager.Add(new User() { FirstName = "Mustafa", LastName = "Sarıgül", Email = "mustafasarigul@gmail.çom", Password = "1234567890" });
-            PrintUserToTest(userManager);
-            User user = userManager.GetUserById(21).Data;
-            Console.WriteLine(user.Id + " " + user.FirstName + " " + user.Email +" " + user.Password);
-            */
-
-            /*
              * rentalManager.Add(new Rental() { CarId =1, CustomerId=1, RentalDate = DateTime.Now});
-            rentalManager.Add(new Rental() { CarId = 2, CustomerId = 1, RentalDate = DateTime.Now });
+             * rentalManager.Add(new Rental() { CarId = 2, CustomerId = 1, RentalDate = DateTime.Now });
             */
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
 
-            //hatalı rental
-            //var result =rentalManager.Add(new Rental() {CarId= 10, CustomerId = 4 ,RentDate = DateTime.Now, ReturnDate = DateTime.Now });
+            // Wrong rental because of rental can not has return date. (It will not add.)
+            // var result =rentalManager.Add(new Rental() {CarId= 10, CustomerId = 4 ,RentDate = DateTime.Now, ReturnDate = DateTime.Now });
+           
+            //Correct rental
+            // rentalManager.Add(new Rental() { CarId = 3, CustomerId = 3, RentDate = DateTime.Now,ReturnDate=null});
+
             var result = rentalManager.CompleteRentalByCarId(10);
             if (result.Success)
             {
-                Console.WriteLine("Ekleme gerçekleşti. sebebi"+ result.Message);
+                Console.WriteLine(Messages);
                 
             }
             else
@@ -56,17 +50,9 @@ namespace ConsoleUI
                 Console.WriteLine("Ekleme gerçekleşmedi. sebebi" + result.Message );
             }
             
-            //başarılı rental
-            // rentalManager.Add(new Rental() { CarId = 3, CustomerId = 3, RentDate = DateTime.Now,ReturnDate=null});
-              
             
             
-          
-            
-
-            // todo details yapısını kur
-            //todo 2 ordan bilgi çekerek rental add yaparken gelen 
-            //rental car ıd sinden detailrental dan return date kontrold et
+        
         }
 
         private static void PrintUserToTest(UserManager userManager)
