@@ -13,14 +13,12 @@ namespace Core.Utilities.Results
         */
         public SuccessResult(string message) : base(true,message)
         {
-
         }
 
         // Same mentality used above, user can create succesfull object without message
         //   by calling the base (result) class constructor that has one parameter in Result(base) class.
         public SuccessResult():base(true)
         {
-
         }
     }
 }

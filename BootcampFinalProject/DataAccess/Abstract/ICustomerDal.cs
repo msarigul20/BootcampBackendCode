@@ -9,6 +9,5 @@ namespace DataAccess.Abstract
 {
     interface ICustomerDal : IEntityRepository<Customer>
     {
-
     }
 }

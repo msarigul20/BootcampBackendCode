@@ -10,7 +10,6 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             ProductTest();
-            //TO DO What is the IoC? Search it!
             //CategoryTest();
             
         }   
