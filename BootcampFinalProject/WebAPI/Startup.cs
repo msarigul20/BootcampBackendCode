@@ -26,12 +26,15 @@ namespace WebAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services to the IoC container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Ýlerde farklý mimarilere taþýnacak 
-                //örneðin Autofac, Ninject, Castlewindsor, StructureMap, LightInject,DryInject -- > IoC Container
-            //AoP --> Bir methodun önünde sonunda hata verdiðinde çalýþan kod parçacýklarýný aop mimarisi ile yazýyoruz.
+            //IoC conainer 
+
+            // In future, this structure will improve.
+                //As an example, Autofac, Ninject, Castlewindsor, StructureMap, LightInject,DryInject -- > Various IoC Containers.
+            //AoP--> We can write code snippet that execute when method produce error 
+            //  before or after the method by getting help with AOP structure.
             services.AddControllers();
             services.AddSingleton<IProductService, ProductManager>();
             services.AddSingleton<IProductDal, EfProductDal>();
