@@ -64,9 +64,9 @@ namespace Business.Concrete
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
         }
 
-        public IResult CompleteRentalByCarId(int id)
+        public IResult CompleteRentalById(int id)
         {
-            var result = _rentalDal.GetAll(r => r.CarId == id);
+            var result = _rentalDal.GetAll(r => r.Id == id);
             var updatedRental = result.SingleOrDefault();
             
             //To prevent to complete rental that is already completed.
