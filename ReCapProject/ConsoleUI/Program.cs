@@ -36,7 +36,7 @@ namespace ConsoleUI
             // rentalManager.Add(new Rental() { CarId = 3, CustomerId = 3, RentDate = DateTime.Now,ReturnDate=null});
 
             // To Test Complete rental
-            // var result = rentalManager.CompleteRentalByCarId(10);
+            // var result = rentalManager.CompleteRentalById(10);
          }
 
         private static void PrintUserToTest(UserManager userManager)
