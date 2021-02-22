@@ -30,6 +30,8 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            /*
+             * Use these to handle with standart .net Core IoC structure.
             services.AddSingleton<ICarService, CarManager>();
             services.AddSingleton<ICarDal, EfCarDal>();
             services.AddSingleton<IRentalService, RentalManager>();
@@ -42,7 +44,7 @@ namespace WebAPI
             services.AddSingleton<IColorDal, EfColorDal>();
             services.AddSingleton<IBrandService, BrandManager>();
             services.AddSingleton<IBrandDal, EfBrandDal>();
-
+            */
 
 
         }
