@@ -36,8 +36,8 @@ namespace WebAPI
             //AoP--> We can write code snippet that execute when method produce error 
             //  before or after the method by getting help with AOP structure.
             services.AddControllers();
-            services.AddSingleton<IProductService, ProductManager>();
-            services.AddSingleton<IProductDal, EfProductDal>();
+            //services.AddSingleton<IProductService, ProductManager>();
+            //services.AddSingleton<IProductDal, EfProductDal>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
