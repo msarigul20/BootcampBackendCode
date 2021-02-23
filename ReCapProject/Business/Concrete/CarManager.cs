@@ -1,9 +1,12 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,14 +24,18 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
+            /*
             if (car.DailyPrice < 0 )
             {
-                /*Console.WriteLine($"Car did not add the database because the daily price must be positive integer. " +
-                    $"You entered :{car.DailyPrice}.");*/
+                //Console.WriteLine($"Car did not add the database because the daily price must be positive integer. " +
+                 //   $"You entered :{car.DailyPrice}.");
 
                 return new ErrorResult(Messages.CarDailyPriceInvalid);
             }
-            
+            */
+           
+            ValidationTool.Validate(new CarValidator(),car);
+
             _carDal.Add(car);
 
             //Console.WriteLine($"The car that is id of {car.CarId} has been added succesfully.");
