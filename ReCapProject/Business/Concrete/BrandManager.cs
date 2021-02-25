@@ -6,6 +6,8 @@ using Entities.Concrete;
 using DataAccess.Abstract;
 using Core.Utilities.Results;
 using Business.Constants;
+using Core.Aspects.Autofac.Validation;
+using Business.ValidationRules.FluentValidation;
 
 namespace Business.Concrete
 {
@@ -17,15 +19,18 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
+            /*
             if (brand.BrandName.Length < 2)
             {
-                /*Console.WriteLine($"Brand did not add the database because the brand name must have 2 characters or more. " +
-                $"You entered :{brand.BrandName}.");*/
+                Console.WriteLine($"Brand did not add the database because the brand name must have 2 characters or more. " +
+                $"You entered :{brand.BrandName}.");
                 return new ErrorResult(Messages.BrandNameInvalid);
             }
-
+            */
+            
             _brandDal.Add(brand);
             return new SuccessResult(Messages.BrandAdded);
             //Console.WriteLine($"The brand that is id of {brand.BrandId} has been added succesfully.");
