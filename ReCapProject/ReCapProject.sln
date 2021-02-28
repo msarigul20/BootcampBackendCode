@@ -11,14 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI", "ConsoleUI\ConsoleUI.csproj", "{E6BAD2B6-F7C4-4ACF-8191-4069972599D9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C7DBB99-DD2A-4795-9887-BA90622C6D89}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL File", "SQL File", "{1C7DBB99-DD2A-4795-9887-BA90622C6D89}"
 	ProjectSection(SolutionItems) = preProject
 		SQLQuery.sql = SQLQuery.sql
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{DD516A69-1A15-4B73-A145-C06B0E7BDAEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{4C99E8E5-E5D8-4ED5-9F9C-C049AFE5C4D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{4C99E8E5-E5D8-4ED5-9F9C-C049AFE5C4D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

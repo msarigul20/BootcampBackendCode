@@ -49,7 +49,13 @@ namespace Business.Constants
         public static string RentalReturnDateNullCheck = "The rental of return date must be null to add first time.";
         public static string RentalAlreadyRented = "The car that you entered id already rented.";
         public static string RentalAlreadyCompleted = "Rental that related to you entered car id has already completed!";
-        internal static string RentalCompleted = "Rental was completed and car returned succesfully.";
+        public static string RentalCompleted = "Rental was completed and car returned succesfully.";
+
+        //Car Images
+        public static string CarImageAdded = "Car was added successfully.";
+        public static string CarImageUpdated = "Car was updated successfully.";
+        public static string CarImageDeleted = "Car was deleted successfully.";
+        public static string CarImageLimitExceded = "Car image limit exceded.";
     }
 
 }

@@ -125,3 +125,14 @@ INSERT INTO Rentals (CarId,CustomerId) VALUES
 	('17','6');
 
 
+CREATE TABLE CarImages(
+Id int PRIMARY KEY IDENTITY(1,1),
+CarID int,
+ImagePath nvarchar(MAX),
+Date datetime,
+
+FOREIGN KEY (CarID) REFERENCES Cars(CarId)
+)
+
+delete from CarImages;
+
