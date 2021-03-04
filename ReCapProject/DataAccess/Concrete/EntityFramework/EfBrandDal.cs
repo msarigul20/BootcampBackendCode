@@ -10,8 +10,5 @@ using Core.DataAccess.EntityFramework;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfBrandDal : EfEntityRepositoryBase<Brand, CarDbContext>, IBrandDal
-    {
-     
-    }
+    public class EfBrandDal : EfEntityRepositoryBase<Brand, CarDbContext>, IBrandDal { }
 }

@@ -15,10 +15,13 @@ namespace Core.Utilities.FileHelper
             try
             {
                 var SourcePath = Path.GetTempFileName();
-                if (file.Length > 0) 
+                if (file.Length > 0)
+                {
                     using (var stream = new FileStream(SourcePath, FileMode.Create))
+                    {
                         file.CopyTo(stream);
-
+                    } 
+                } 
                 File.Move(SourcePath, path);              
             }
             catch (Exception exeption)
@@ -34,9 +37,13 @@ namespace Core.Utilities.FileHelper
             try
             {
                 if (sourcePath.Length > 0)
+                {
                     using (var stream = new FileStream(path, FileMode.Create))
+                    {
                         file.CopyTo(stream);
-                   
+                    }
+                        
+                }
 
                 File.Delete(sourcePath);
             }
@@ -60,6 +67,8 @@ namespace Core.Utilities.FileHelper
             return new SuccessResult();
         }
 
+        //  If could not find Images folder in project base, 
+        //      creates new folder that is Images with checking "!Directory.Exists(tempPath)".  
         public static string CreateNewPathWithGUI (IFormFile file)
         {
             System.IO.FileInfo FileInfo = new System.IO.FileInfo(file.FileName);
@@ -72,11 +81,14 @@ namespace Core.Utilities.FileHelper
                 + FileExtention;
             
             string tempPath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName + @"\Images");
-            //Create Images Folder if there is no Images folder.
+                        
             if (!Directory.Exists(tempPath))
+            {
                 Directory.CreateDirectory(tempPath);
-
+            }
+             
             string path = $@"{tempPath}\{CreatedUniqueFileName}";
+
             return path;
         }
     }

@@ -10,8 +10,5 @@ using Core.DataAccess.EntityFramework;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfColorDal : EfEntityRepositoryBase<Color,CarDbContext>, IColorDal
-    {
-         
-    }
+    public class EfColorDal : EfEntityRepositoryBase<Color,CarDbContext>, IColorDal { }
 }
