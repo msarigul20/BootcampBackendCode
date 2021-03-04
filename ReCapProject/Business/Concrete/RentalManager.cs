@@ -19,38 +19,49 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
+        /*
+         *  To Prevent null return date problem (used "rental.ReturnDate!=null" to check):
+         *      If ReturnDate is null to add first time, the car can rent as free or 
+         *      it seems that already rented but it is not in real.
+         *      
+         *  At the end: when looking the detail, we need to see return date (NOT NULL) 
+         *      immediately after adding process.
+         */
+
+        //  Used resultToCheckRented to prevent to rent car that is already rented.
+
         public IResult Add(Rental rental)
-        {
-            // To Prevent null return date problem:
-            // If ReturnDate is null to add first time, the car can rent as free or 
-            // it seems that already rented but it is not in real. 
-            // When looking the detail, we need to see return date (NOT NULL) immediately after adding process.
+        {         
             if (rental.ReturnDate!=null)
             {
                 return new ErrorResult(Messages.RentalReturnDateNullCheck);
             }
-            // To prevent to rent car that is already rented.
-            var result = _rentalDal.GetRentalDetails((r => r.CarId == rental.CarId && r.ReturnDate==null));
-            if (result.Count > 0)
+
+            var resultToCheckRented = _rentalDal.GetRentalDetails(
+                    (r => r.CarId == rental.CarId && r.ReturnDate==null)
+                );
+            
+            if (resultToCheckRented.Count > 0)
             {
                 return new ErrorResult(Messages.RentalAlreadyRented);
             }
 
             _rentalDal.Add(rental);
+
             return new SuccessResult(Messages.RentalAdded);
-
-
         }
 
         public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);
+
             return new SuccessResult(Messages.RentalUpdated);
         }
 
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
+
             return new SuccessResult(Messages.RentalDeleted);
         }
 
@@ -64,20 +75,22 @@ namespace Business.Concrete
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
         }
 
+        //  Used "updatedRental.ReturnDate != null":
+        //      to prevent to complete rental that is already completed.
+
         public IResult CompleteRentalById(int id)
         {
-            var result = _rentalDal.GetAll(r => r.Id == id);
-            var updatedRental = result.SingleOrDefault();
+            var updatedRental = _rentalDal.GetAll(r => r.Id == id).SingleOrDefault();
             
-            //To prevent to complete rental that is already completed.
             if (updatedRental.ReturnDate != null)
             {
                 return new ErrorResult(Messages.RentalAlreadyCompleted);
             }
+
             updatedRental.ReturnDate = DateTime.Now;
             _rentalDal.Update(updatedRental);
+
             return new SuccessResult(Messages.RentalCompleted);
         }
-
     }
 }
