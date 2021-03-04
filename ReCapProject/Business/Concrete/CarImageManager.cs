@@ -16,14 +16,15 @@ using System.Text;
 
 namespace Business.Concrete
 {
-
     public class CarImageManager : ICarImageService
     {
         ICarImageDal _carImageDal;
+
         public CarImageManager(ICarImageDal carImageDal)
         {
             _carImageDal = carImageDal;
         }
+
        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
@@ -43,12 +44,10 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Delete(CarImage carImage)
         {
-
             FileHelper.DeleteAsync(carImage.ImagePath);
             _carImageDal.Delete(carImage);
-            return new SuccessResult("Image deleted succesfuly.");
 
-
+            return new SuccessResult(Messages.CarImageDeleted);
         }
 
         public IDataResult<List<CarImage>> GetAll()
@@ -60,11 +59,13 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<CarImage>(_carImageDal.Get(ci => ci.Id == id));
         }
+
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage)
         {
             carImage.ImagePath = FileHelper.UpdateAsync(_carImageDal.Get(ci => ci.Id == carImage.Id).ImagePath,file);
             _carImageDal.Update(carImage);
+
             return new SuccessResult(Messages.CarImageUpdated);
         }
 
@@ -77,8 +78,16 @@ namespace Business.Concrete
         {
             string path = @"\Images\defaultPicture.png";
             var result = _carImageDal.GetAll(ci => ci.CarId == carId).Any();
+
             if (!result)
-                return new List<CarImage> { new CarImage() { CarId = carId, ImagePath = path, Date=DateTime.Now } };
+            {
+                return new List<CarImage> { 
+                    new CarImage() { 
+                        CarId = carId, ImagePath = path, Date = DateTime.Now 
+                    } 
+                };
+            }
+
             return _carImageDal.GetAll(ci => ci.CarId == carId);
         }
 
@@ -91,7 +100,5 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
-
-        
     }
 }
