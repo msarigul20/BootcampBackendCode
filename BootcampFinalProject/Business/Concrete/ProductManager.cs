@@ -2,6 +2,7 @@
 using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Business;
@@ -17,6 +18,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
+    //23.55 - 23.23  - 00.10
 
     public class ProductManager : IProductService
     {
@@ -39,8 +41,6 @@ namespace Business.Concrete
             _productDal = productDal;
             _categoryService = categoryService;
         }
-
-
         //Note cross cutting concerns (01:44:12-12.Day)
         //Log - Cache - Transcation - Authorization - Performance 
         //business codes c= validation
@@ -68,6 +68,7 @@ namespace Business.Concrete
             }
             */
         //Claim
+        [CacheRemoveAspect("IProductService.Get")]
         [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
@@ -85,6 +86,7 @@ namespace Business.Concrete
             
         }
 
+        [CacheAspect] //key,value
         public IDataResult<List<Product>> GetAll()
         {
             /*
@@ -101,7 +103,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
         }
-
+        [CacheAspect]
         public IDataResult<Product> GetById(int productId)
         {
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
