@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
         {
             _userService = userService;
         }
-
+        /*
         [HttpPost("add")]
         public IActionResult Add(User user)
         {
@@ -73,6 +73,8 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest(result.Message);
+        
         }
+        */
     }
 }

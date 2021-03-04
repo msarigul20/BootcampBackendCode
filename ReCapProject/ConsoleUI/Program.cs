@@ -39,7 +39,7 @@ namespace ConsoleUI
             // var result = rentalManager.CompleteRentalById(10);
          }
 
-        private static void PrintUserToTest(UserManager userManager)
+        /*private static void PrintUserToTest(UserManager userManager)
         {
             Console.WriteLine("--------------------------------------------------------------------------------------------");
             Console.WriteLine("| User Id |  First Name  |  Last Name   |            Email          |        Password      |");
@@ -50,7 +50,7 @@ namespace ConsoleUI
             }
             Console.WriteLine("--------------------------------------------------------------------------------------------");
         }
-
+        */
         private static void GetCarsDetail(CarManager carManager)
         {
             Console.WriteLine("------------------------------------------------------");
