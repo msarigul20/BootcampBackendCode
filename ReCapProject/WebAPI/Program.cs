@@ -19,7 +19,7 @@ namespace WebAPI
             CreateHostBuilder(args).Build().Run();
         }
 
-        //Updated to work Autofac IoC container structure and configured with my class.
+        //  Updated to work Autofac IoC container structure and configured according to my provider class (Autofac).
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
             .UseServiceProviderFactory(new AutofacServiceProviderFactory())
