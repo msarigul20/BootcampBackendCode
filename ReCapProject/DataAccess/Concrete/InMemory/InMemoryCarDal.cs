@@ -10,15 +10,17 @@ using System.Text;
 
 namespace DataAccess.Concrete.InMemory
 {
-
+    // !!! This class used start of the project after that it will not used 
+    //      but it will stay here as huge comment to prevent errors can be occur in future.
     /*
-     * Ignored the intheritance because of I won't use anymore InMemory way to access data.
-     * I'll use EntityFramework way so that if it  implements ICarDal, this class will be error 
-     *  for adding each new method into ICarDal or changing each method. 
-     * Remove below comment in sign of class it you want to use InMemory way to access data.
-     */
     public class InMemoryCarDal : ICarDal
     {
+        
+        * Ignored the intheritance because of I won't use anymore InMemory way to access data.
+        * I'll use EntityFramework way so that if it  implements ICarDal, this class will be error 
+        *  for adding each new method into ICarDal or changing each method. 
+        * Remove below comment in sign of class it you want to use InMemory way to access data.
+        
         List<Car> _cars;
 
         public InMemoryCarDal()
@@ -89,4 +91,5 @@ namespace DataAccess.Concrete.InMemory
 
 
     }
+    */
 }
