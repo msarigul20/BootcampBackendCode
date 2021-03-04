@@ -16,23 +16,25 @@ namespace Business.Concrete
     public class ColorManager : IColorService
     {
         IColorDal _colorDal;
+
         public ColorManager(IColorDal colorDal)
         {
             _colorDal = colorDal;
         }
+
         [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color color)
         {
             _colorDal.Add(color);
+
             return new SuccessResult(Messages.ColorAdded);
-            //Console.WriteLine($"The color that is id of {color.ColorId} has been added succesfully.");
         }
 
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
+
             return new SuccessResult(Messages.ColorDeleted);
-            //Console.WriteLine($"The color that is id of {color.ColorId} has been deleted succesfully.");
         }
 
         public IDataResult<List<Color>> GetAll()
@@ -48,8 +50,8 @@ namespace Business.Concrete
         public IResult Update(Color color)
         {
             _colorDal.Update(color);
+
             return new SuccessResult(Messages.ColorUpdated);
-            //Console.WriteLine($"The color that is id of {color.ColorId} has been updated succesfully.");
         }
     }
 }
