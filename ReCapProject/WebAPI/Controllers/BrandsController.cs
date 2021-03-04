@@ -21,7 +21,6 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-
         public IActionResult Add(Brand brand)
         {
             var result = _brandService.Add(brand);
@@ -29,6 +28,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
 
@@ -40,6 +40,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
 
@@ -51,6 +52,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
 
@@ -62,6 +64,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
 
@@ -73,9 +76,8 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
-
-
     }
 }

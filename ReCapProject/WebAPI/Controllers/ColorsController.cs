@@ -14,6 +14,7 @@ namespace WebAPI.Controllers
     public class ColorsController : ControllerBase
     {
         IColorService _colorService;
+
         public ColorsController(IColorService colorService)
         {
             _colorService = colorService;
@@ -27,6 +28,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
 
@@ -38,6 +40,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
 
@@ -49,6 +52,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
 
@@ -60,6 +64,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
 
@@ -71,9 +76,8 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
-
-
     }
 }

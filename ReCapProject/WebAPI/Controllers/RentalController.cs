@@ -28,6 +28,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result.Data);
             }
+
             return BadRequest(result.Message);
         }
 
@@ -39,6 +40,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result.Data);
             }
+
             return BadRequest(result.Message);
         }
 
@@ -50,6 +52,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
 
@@ -61,8 +64,10 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
+
         [HttpPost("delete")]
         public IActionResult Delete(Rental rental)
         {
@@ -71,6 +76,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
 
@@ -82,8 +88,8 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
         }
-
     }
 }
