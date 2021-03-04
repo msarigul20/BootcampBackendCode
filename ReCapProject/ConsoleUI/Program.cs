@@ -6,10 +6,10 @@ using Entities.Concrete;
 using System.Linq;
 
 namespace ConsoleUI
-{
-    class Program
+{   // !!! This class used start of the project after that it will not used 
+    //      but it will stay here as huge comment to prevent errors can be occur in future.
+    /*class Program
     {
-        
         static void Main(string[] args)
         {
 
@@ -39,7 +39,7 @@ namespace ConsoleUI
             // var result = rentalManager.CompleteRentalById(10);
          }
 
-        /*private static void PrintUserToTest(UserManager userManager)
+        private static void PrintUserToTest(UserManager userManager)
         {
             Console.WriteLine("--------------------------------------------------------------------------------------------");
             Console.WriteLine("| User Id |  First Name  |  Last Name   |            Email          |        Password      |");
@@ -50,7 +50,7 @@ namespace ConsoleUI
             }
             Console.WriteLine("--------------------------------------------------------------------------------------------");
         }
-        */
+
         private static void GetCarsDetail(CarManager carManager)
         {
             Console.WriteLine("------------------------------------------------------");
@@ -109,16 +109,13 @@ namespace ConsoleUI
                     $"\t{color.ColorName}" +
                     $"\t\b\b");
             }
-            Console.WriteLine("***********************************************************************************");
-          
-           
+            Console.WriteLine("***********************************************************************************");     
         }
         private static void ClearLastColor(ColorManager colorManager, int howMantTimes) {
             for (int i = 1; i <= howMantTimes; i++)
             {
                 colorManager.Delete(colorManager.GetAll().Data[colorManager.GetAll().Data.Count - 1]);
             }
-            
         }
         
         //Test Brand Mehtods
@@ -168,8 +165,6 @@ namespace ConsoleUI
                     $"\t\b\b");
             }
             Console.WriteLine("***********************************************************************************");
-
-
         }
         private static void ClearLastBrand(BrandManager brandManager, int howMantTimes)
         {
@@ -177,7 +172,6 @@ namespace ConsoleUI
             {
                 brandManager.Delete(brandManager.GetAll().Data[brandManager.GetAll().Data.Count - 1]);
             }
-
         }
 
         //Test Car Mehtods
@@ -252,8 +246,6 @@ namespace ConsoleUI
                     $"\t\b\b");
             }
             Console.WriteLine("***********************************************************************************");
-
-
         }
         private static void ClearLastCar(CarManager carManager, int howMantTimes)
         {
@@ -261,10 +253,6 @@ namespace ConsoleUI
             {
                 carManager.Delete(carManager.GetAll().Data[carManager.GetAll().Data.Count - 1]);
             }
-
         }
-
-
-
-    }
+    }*/
 }
