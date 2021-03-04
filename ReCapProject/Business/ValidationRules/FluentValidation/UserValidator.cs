@@ -18,8 +18,6 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(u => u.PasswordHash).NotEmpty();
             RuleFor(u => u.PasswordSalt).NotEmpty();
             RuleFor(u => u.Status).NotEmpty();
-
-
         }
     }
 }
