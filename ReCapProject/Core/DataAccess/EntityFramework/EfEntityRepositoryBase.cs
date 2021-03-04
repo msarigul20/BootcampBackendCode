@@ -12,16 +12,22 @@ namespace Core.DataAccess.EntityFramework
         where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
+        #region Lesson Note
+        /*
+         * Used Disposable Pattern with "using (TContext context = new TContext())":
+         *  IDisposable pattern implementation of C# to gain memory speed 
+         *      by triggering garbage collector after terminating snippet.
+         * Caught the reference with "var addedEntity = context.Entry(entity);".
+         * Entity state set related to operation with "addedEntity.State = EntityState.Added;".
+         * After all process saved all changes that means really happened with "context.SaveChanges();".
+         */
+        #endregion
         public void Add(TEntity entity)
         {
-            //IDisposable pattern implementation of C# to gain memory speed by triggering garbage collector after terminating snippet.
             using (TContext context = new TContext())
             {
-                //Catch the reference
                 var addedEntity = context.Entry(entity);
-                //Its object that will add.
                 addedEntity.State = EntityState.Added;
-                //Save all changes.(Really added.)
                 context.SaveChanges();
             }
         }
