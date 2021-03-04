@@ -16,11 +16,16 @@ namespace Business.DependencyResolvers.Autofac
 {
     public class AutofacBusinessModule : Module
     {
-        // If tried to access the instance of IProductService {As<>}, 
-        //create a single instance from ProductManager class then give it reference to client {RegisterType<>}.
-        //Needs to configuration in Program file in WebAPI layer in CreateHostBuilder methot 
-            //for informing the builder to work with autofac 
-            //because .net core also has IoC container structure in itself but we did not use it.
+        #region Lesson Note
+        /*
+         * If tried to access the instance of ICarService {As<>},
+         * create a single instance from CarManager class then give it reference to client {RegisterType<>}.
+         * Needs to configuration in Program file in WebAPI layer in CreateHostBuilder method 
+         * for informing the builder to work with Autofac because .net core also has 
+         * IoC container structure in itself but we did not want to use it.
+         */
+        #endregion
+       
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<CarManager>().As<ICarService>().SingleInstance();
@@ -47,8 +52,6 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 
-
-
             //Checking that register types does have any aspect ([...]).
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
@@ -57,8 +60,6 @@ namespace Business.DependencyResolvers.Autofac
                 {
                     Selector = new AspectInterceptorSelector()
                 }).SingleInstance();
-
-
         }
     }
 }
