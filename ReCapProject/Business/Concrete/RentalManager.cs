@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Transaction;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -78,6 +79,7 @@ namespace Business.Concrete
         //  Used "updatedRental.ReturnDate != null":
         //      to prevent to complete rental that is already completed.
 
+        [TransactionScopeAspect]
         public IResult CompleteRentalById(int id)
         {
             var updatedRental = _rentalDal.GetAll(r => r.Id == id).SingleOrDefault();
