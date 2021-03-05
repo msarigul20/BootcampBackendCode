@@ -27,6 +27,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CarValidator))]
         [SecuredOperation("car.add,admin")]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             _carDal.Add(car);
@@ -54,7 +55,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        [SecuredOperation("car.list")]
+        [SecuredOperation("car.list,admin")]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
