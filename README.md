@@ -1,5 +1,5 @@
 
-<h1 align="center">Bootcamp Code Folder</h1>
+<h1 align="center">Bootcamp Back-End Code Folder</h1>
 <hr style="border:2px solid gray"> </hr>
 <p align="center">
   <img src="PaperLogo.png" alt="Logo" width="80" height="80">
