@@ -31,12 +31,6 @@ namespace Business.Constants
         public static string ColorDeleted = "Color Deleted.";
         public static string ColorListed = "Color Listed.";
 
-        //Users
-        public static string UserUpdated = "User Updated.";
-        public static string UserAdded = "User Added.";
-        public static string UserDeleted = "User Deleted.";
-        public static string UserListed = "User Listed.";
-
         //Customers
         public static string CustomerUpdated = "Customer Updated.";
         public static string CustomerAdded = "Customer Added.";
@@ -67,6 +61,11 @@ namespace Business.Constants
         public static string SuccessfulLogin ="Entered successfully.";
         public static string UserAlreadyExists="User already exists.";
         public static string AccessTokenCreated="Access token has been created.";
+        public static string UserUpdated = "User updated successfully.";
+        public static string UserAdded = "User added successfully.";
+        public static string UserDeleted = "User deleted successfully.";
+        public static string UserListed = "User listed successfully.";
+        public static string ClaimsListed = "Claims listed by user object.";
     }
 
 }

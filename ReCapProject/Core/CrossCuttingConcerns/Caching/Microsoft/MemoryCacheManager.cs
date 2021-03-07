@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
 using System.Linq;
+using Core.Utilities.Results;
 
 namespace Core.CrossCuttingConcerns.Caching.Microsoft
 {
@@ -29,51 +30,86 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
             _memoryCache = ServiceTool.ServiceProvider.GetService<IMemoryCache>();
         }
 
-        public void Add(string key, object value, int duration)
+        public IResult Add(string key, object value, int duration)
         {
-            _memoryCache.Set(key, value, TimeSpan.FromMinutes(duration));
-        }
-
-        public T Get<T>(string key)
-        {
-            return _memoryCache.Get<T>(key);
-        }
-
-        public object Get(string key)
-        {
-            return _memoryCache.Get(key);
-        }
-
-        public bool IsAdd(string key)
-        {
-            // We didn't want to return data then used "out _" to ignore data from coming method.
-            return _memoryCache.TryGetValue(key, out _);
-        }
-
-        public void Remove(string key)
-        {
-            _memoryCache.Remove(key);
-        }
-
-        public void RemoveByPattern(string pattern)
-        {
-            var cacheEntriesCollectionDefinition = typeof(MemoryCache).GetProperty("EntriesCollection", 
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var cacheEntriesCollection = cacheEntriesCollectionDefinition.GetValue(_memoryCache) as dynamic;
-            List<ICacheEntry> cacheCollectionValues = new List<ICacheEntry>();
-
-            foreach (var cacheItem in cacheEntriesCollection)
+            try
             {
-                ICacheEntry cacheItemValue = cacheItem.GetType().GetProperty("Value").GetValue(cacheItem, null);
-                cacheCollectionValues.Add(cacheItemValue);
+                _memoryCache.Set(key, value, TimeSpan.FromMinutes(duration));
+                return new SuccessResult($"Key added into cache for {duration} minutes.");
             }
+            catch (Exception e)
+            {
 
-            var regex = new Regex(pattern, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            var keysToRemove = cacheCollectionValues.Where(d => regex.IsMatch(d.Key.ToString())).Select(d => d.Key).ToList();
+                return new ErrorResult(e.Message);
+            }
+        }
 
-            foreach (var key in keysToRemove)
+        public IDataResult<T> Get<T>(string key)
+        {
+            return new SuccessDataResult<T>(_memoryCache.Get<T>(key), "Data received from cache with generic.");
+        }
+
+        public IDataResult<object> Get(string key)
+        {
+            return new SuccessDataResult<object>(_memoryCache.Get(key), "Data received from cache with object.");
+        }
+
+        public IDataResult<bool> IsAdd(string key)
+        {
+            try
+            {
+                // We didn't want to return data then used "out _" to ignore data from coming method.
+                return new SuccessDataResult<bool>(_memoryCache.TryGetValue(key, out _));
+            }
+            catch (Exception e)
+            {
+
+                return new ErrorDataResult<bool>(e.Message);
+            }          
+        }
+
+        public IResult Remove(string key)
+        {
+            try
             {
                 _memoryCache.Remove(key);
+                return new SuccessResult("Key revomed in cache.");
+            }
+            catch (Exception e)
+            {
+                return new ErrorResult(e.Message);
+            }
+        }
+
+        public IResult RemoveByPattern(string pattern)
+        {
+            try
+            {
+                var cacheEntriesCollectionDefinition = typeof(MemoryCache).GetProperty("EntriesCollection",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                var cacheEntriesCollection = cacheEntriesCollectionDefinition.GetValue(_memoryCache) as dynamic;
+                List<ICacheEntry> cacheCollectionValues = new List<ICacheEntry>();
+
+                foreach (var cacheItem in cacheEntriesCollection)
+                {
+                    ICacheEntry cacheItemValue = cacheItem.GetType().GetProperty("Value").GetValue(cacheItem, null);
+                    cacheCollectionValues.Add(cacheItemValue);
+                }
+
+                var regex = new Regex(pattern, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                var keysToRemove = cacheCollectionValues.Where(d => regex.IsMatch(d.Key.ToString())).Select(d => d.Key).ToList();
+
+                foreach (var key in keysToRemove)
+                {
+                    _memoryCache.Remove(key);
+                }
+
+                return new SuccessResult("Key removed with pattern in cache.");
+            }
+            catch (Exception e)
+            {
+
+                return new ErrorResult(e.Message);
             }
         }
     }
