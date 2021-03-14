@@ -4,6 +4,7 @@ using Core.Aspects.Autofac.Transaction;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +94,12 @@ namespace Business.Concrete
             _rentalDal.Update(updatedRental);
 
             return new SuccessResult(Messages.RentalCompleted);
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetRentalDetails()
+        {
+            _rentalDal.GetRentalDetails();
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
         }
     }
 }
