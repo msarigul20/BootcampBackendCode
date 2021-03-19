@@ -7,11 +7,21 @@ using System.Text;
 
 namespace Core.Utilities.FileHelper
 {
+    //mine code 
     public class FileHelper
     {
         public static string AddAsync(IFormFile file)
         {
-            var path = CreateNewPathWithGUI(file);
+            var guidPath = CreateNewPathWithGUI(file);
+            string fullPath = Environment.CurrentDirectory + "\\wwwroot\\images\\"+guidPath;
+            string folderPath = Environment.CurrentDirectory + "\\wwwroot\\images\\";
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+            string shortFolderPath = "\\images\\";
+            string imagePath = $@"{shortFolderPath}{guidPath}";
+            string urlImagePath = imagePath.Replace("\\", "/");
             try
             {
                 var SourcePath = Path.GetTempFileName();
@@ -20,57 +30,66 @@ namespace Core.Utilities.FileHelper
                     using (var stream = new FileStream(SourcePath, FileMode.Create))
                     {
                         file.CopyTo(stream);
-                    } 
-                } 
-                File.Move(SourcePath, path);              
+                    }
+                }
+                File.Move(SourcePath, fullPath);
             }
             catch (Exception exeption)
             {
                 return exeption.Message;
             }
-            return path;
+            return urlImagePath;
         }
 
         public static string UpdateAsync(string sourcePath, IFormFile file)
         {
-            var path = CreateNewPathWithGUI(file);
+            var guidPath = CreateNewPathWithGUI(file);
+            string fullPath = Environment.CurrentDirectory + "\\wwwroot\\images\\"+guidPath;
+            string folderPath = Environment.CurrentDirectory + "\\wwwroot";
+            string urlImageFolder = "/images/";
             try
             {
                 if (sourcePath.Length > 0)
                 {
-                    using (var stream = new FileStream(path, FileMode.Create))
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
                     }
-                        
-                }
 
-                File.Delete(sourcePath);
+                }
+                string deletedPath = sourcePath.Replace("/","\\");
+                deletedPath = folderPath + deletedPath;
+                File.Delete(deletedPath);
             }
             catch (Exception exception)
             {
 
                 return exception.Message;
             }
-            return path;
+            return urlImageFolder + guidPath;
         }
         public static IResult DeleteAsync(string path)
         {
+            string fullPath = Environment.CurrentDirectory + "\\wwwroot";
+            path = path.Replace("/", "\\");
+            string deletedPath = fullPath + path;
+
             try
             {
-                File.Delete(path);
+                File.Delete(deletedPath);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return new ErrorResult("Photo did not delete.");
+                return new ErrorResult("Photo did not delete because "+ e.Message);
             }
             return new SuccessResult();
         }
 
-        //  If could not find Images folder in project base, 
+        // not working for now  If could not find Images folder in project base, 
         //      creates new folder that is Images with checking "!Directory.Exists(tempPath)".  
-        public static string CreateNewPathWithGUI (IFormFile file)
+        public static string CreateNewPathWithGUI(IFormFile file)
         {
+
             System.IO.FileInfo FileInfo = new System.IO.FileInfo(file.FileName);
             string FileExtention = FileInfo.Extension;
 
@@ -78,18 +97,8 @@ namespace Core.Utilities.FileHelper
                 + "_" + DateTime.Now.Day + "_"
                 + "_" + DateTime.Now.Month + "_"
                 + "_" + DateTime.Now.Year + "_"
-                + FileExtention;
-            
-            string tempPath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName + @"\Images");
-                        
-            if (!Directory.Exists(tempPath))
-            {
-                Directory.CreateDirectory(tempPath);
-            }
-             
-            string path = $@"{tempPath}\{CreatedUniqueFileName}";
-
-            return path;
+                + FileExtention.ToString();
+            return CreatedUniqueFileName;
         }
     }
 }
