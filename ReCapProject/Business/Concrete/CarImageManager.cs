@@ -64,6 +64,7 @@ namespace Business.Concrete
         public IResult Update(IFormFile file, CarImage carImage)
         {
             carImage.ImagePath = FileHelper.UpdateAsync(_carImageDal.Get(ci => ci.Id == carImage.Id).ImagePath,file);
+            carImage.Date = DateTime.Now;
             _carImageDal.Update(carImage);
 
             return new SuccessResult(Messages.CarImageUpdated);
@@ -71,12 +72,13 @@ namespace Business.Concrete
 
         public IDataResult<List<CarImage>> GetCarImagesByCarId(int carId)
         {
-            return new SuccessDataResult<List<CarImage>>(CheckIsCarImageNull(carId).Data);
+            var result = CheckIsCarImageNull(carId).Data;
+            return new SuccessDataResult<List<CarImage>>(result);
         }
 
         private IDataResult<List<CarImage>> CheckIsCarImageNull(int carId)
         {
-            string path = @"\Images\defaultPicture.png";
+            string path = "/images/defaultPicture.png";
             var result = _carImageDal.GetAll(ci => ci.CarId == carId).Any();
 
             if (!result)
@@ -88,7 +90,8 @@ namespace Business.Concrete
                 });
             }
 
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(ci => ci.CarId == carId).ToList());
+            var result2 = _carImageDal.GetAll(ci => ci.CarId == carId).ToList();
+            return new SuccessDataResult<List<CarImage>>(result2);
         }
 
         private IResult CheckIsCarImageLimitExceded(int carId)
