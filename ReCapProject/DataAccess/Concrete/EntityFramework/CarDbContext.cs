@@ -34,6 +34,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<FakeCard> FakeCards { get; set; }
 
         //The method (OnConfiguring) provides to state that the project related to which database. 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
