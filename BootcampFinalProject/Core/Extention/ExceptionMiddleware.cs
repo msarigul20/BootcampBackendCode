@@ -26,6 +26,7 @@ namespace Core.Extention
             }
             catch (Exception e)
             {
+                var temp2 = e.GetType();
                 await HandleExceptionAsync(httpContext, e);
             }
         }
@@ -37,7 +38,7 @@ namespace Core.Extention
 
             string message = "Internal Server Error";
             IEnumerable<ValidationFailure> errors;
-
+            var temp = e.GetType();
             if (e.GetType() == typeof(ValidationException))
             {
                 message = e.Message;
