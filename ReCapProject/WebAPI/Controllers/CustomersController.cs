@@ -19,17 +19,7 @@ namespace WebAPI.Controllers
             _customerService = customerService;
         }
 
-        [HttpGet("getall")]
-        public IActionResult GetAll()
-        {
-            var result = _customerService.GetAll();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.Message);
-        }
+       
 
         [HttpPost("add")]
         public IActionResult Add(Customer customer)
@@ -67,7 +57,7 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }    
 
-        [HttpPost("getbyid")]
+        [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
             var result = _customerService.GetCustomerById(id);
@@ -77,6 +67,42 @@ namespace WebAPI.Controllers
             }
 
             return BadRequest(result.Message);
-        }   
+        }
+
+        [HttpGet("getdetails")]
+        public IActionResult GetDetails()
+        {
+            var result = _customerService.GetDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.Message);
+        }
+
+        [HttpGet("getall")]
+        public IActionResult GetAll()
+        {
+            var result = _customerService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.Message);
+        }
+        [HttpGet("getdetailsbyid")]
+        public IActionResult GetDetailsByCustomerId(int id)
+        {
+            var result = _customerService.GetDetailsById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.Message);
+        }
+
     }
 }

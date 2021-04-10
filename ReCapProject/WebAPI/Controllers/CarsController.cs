@@ -174,5 +174,19 @@ namespace WebAPI.Controllers
 
             return BadRequest(result.Message);
         }
+
+        [HttpGet("getbyselected")]
+        public IActionResult GetBySelected(int brandId, int colorId)
+        {
+            var result = _carService.GetCarsBySelect(brandId,colorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.Message);
+        }
+
+
     } 
 }

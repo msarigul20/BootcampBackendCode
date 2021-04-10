@@ -103,5 +103,19 @@ namespace WebAPI.Controllers
 
             return BadRequest(result.Message);
         }
+
+        [HttpGet("getcarcontrol")]
+        public IActionResult GetCarControl(int carId)
+        {
+            var result = _rentalService.RentalCarControl(carId);
+            return Ok(result);
+        }
+
+        [HttpPost("checkdates")]
+        public IActionResult CheckAvailableDates(Rental rental)
+        {
+            var result = _rentalService.CheckAvailableDate(rental);
+            return Ok(result);
+        }
     }
 }
