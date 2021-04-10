@@ -33,16 +33,11 @@ namespace Business.Concrete
         //  Used resultToCheckRented to prevent to rent car that is already rented.
 
         public IResult Add(Rental rental)
-        {         
-            if (rental.ReturnDate!=null)
-            {
-                return new ErrorResult(Messages.RentalReturnDateNullCheck);
-            }
-
+        {
             var resultToCheckRented = _rentalDal.GetRentalDetails(
-                    (r => r.CarId == rental.CarId && r.ReturnDate==null)
-                );
-            
+                    r => r.CarId == rental.CarId && DateTime.Compare(rental.RentDate, (DateTime)r.ReturnDate) < 0);
+
+
             if (resultToCheckRented.Count > 0)
             {
                 return new ErrorResult(Messages.RentalAlreadyRented);
@@ -84,7 +79,7 @@ namespace Business.Concrete
         public IResult CompleteRentalById(int id)
         {
             var updatedRental = _rentalDal.GetAll(r => r.Id == id).SingleOrDefault();
-            
+
             if (updatedRental.ReturnDate != null)
             {
                 return new ErrorResult(Messages.RentalAlreadyCompleted);
@@ -100,6 +95,35 @@ namespace Business.Concrete
         {
             _rentalDal.GetRentalDetails();
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
+        }
+
+        public IResult RentalCarControl(int carId)//rent date
+        {
+            var result = _rentalDal.GetRentalDetails(r => r.CarId == carId && r.ReturnDate == null).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.RentalNotDelivered);
+            }
+
+            return new SuccessResult();
+        }
+
+        public IResult CheckAvailableDate(Rental rental)
+        {
+            var result = _rentalDal.GetRentalDetails(r => r.CarId == rental.CarId).
+                Where(r => 
+                        ((r.RentDate == rental.RentDate) && (r.ReturnDate == rental.ReturnDate)) ||
+                        ((rental.RentDate >= r.RentDate) && (rental.RentDate <= r.ReturnDate)) ||
+                        ((rental.ReturnDate >= r.RentDate) && (rental.ReturnDate <= r.ReturnDate))
+                     ).ToList();
+
+
+            if (result.Count > 0)
+            {
+                string errorMessage = "This car already rented between " + result[0].RentDate + " and " + result[0].ReturnDate+" .";
+                return new ErrorResult(errorMessage);
+            }
+            return new SuccessResult("where koşullarına takılmadı");
         }
     }
 }
