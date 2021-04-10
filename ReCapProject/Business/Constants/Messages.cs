@@ -66,6 +66,12 @@ namespace Business.Constants
         public static string UserDeleted = "User deleted successfully.";
         public static string UserListed = "User listed successfully.";
         public static string ClaimsListed = "Claims listed by user object.";
+
+
+
+
+        public static string RentalNotDelivered = "Araç kiralanamaz teslim edilmemiş.";
+
     }
 
 }
