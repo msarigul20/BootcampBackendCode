@@ -86,11 +86,7 @@ namespace WebAPI.Controllers
         public IActionResult IsCardExist(FakeCard fakeCard)
         {
             var result = _fakeCardService.DoesCardExist(fakeCard);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
+            return Ok(result);
         }
 
 
