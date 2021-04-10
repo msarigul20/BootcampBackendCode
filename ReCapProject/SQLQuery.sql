@@ -162,3 +162,15 @@ CREATE TABLE [dbo].[OperationClaims] (
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
+CREATE TABLE [dbo].[FakeCards]
+(
+	[Id] INT NOT NULL IDENTITY (1, 1), 
+    [NameOnTheCard] VARCHAR(70) NOT NULL, 
+    [CardNumber] VARCHAR(16) NOT NULL, 
+    [CardCvv] VARCHAR(3) NOT NULL, 
+    [ExpirationDate] VARCHAR(5) NOT NULL, 
+    [MoneyInTheCard] DECIMAL NOT NULL,
+	PRIMARY KEY CLUSTERED ([Id] ASC)
+)
+
+
